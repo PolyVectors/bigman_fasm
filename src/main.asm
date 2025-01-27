@@ -9,4 +9,4 @@ hello_len = $-hello
 entry _start
 _start:
     SYS_write STDOUT_FILENO, hello, hello_len
-    exit 0
+    SYS_exit 0
