@@ -1,6 +1,5 @@
 format ELF64 executable
 
-include 'macros/io.inc'
 include 'macros/sys.inc'
 include 'macros/lang.inc'
 
