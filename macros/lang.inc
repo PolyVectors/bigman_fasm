@@ -1,12 +1,12 @@
 macro for i*, start*, end* {
-    mov DWORD [i], start
+    mov QWORD [i], start
 .#i#_again:
-    cmp DWORD [i], end
+    cmp QWORD [i], end
     jge .#i#_over
 }
 
 macro next i*, increase* {
-    add DWORD [i], increase
+    add QWORD [i], increase
     jmp .#i#_again
 .#i#_over:
 }
