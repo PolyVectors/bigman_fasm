@@ -1,12 +1,9 @@
 format ELF64 executable
 
-include 'macros/sys.inc'
-include 'macros/lang.inc'
+include 'src/macros/sys.inc'
+include 'src/macros/io.inc'
 
-hello: db "Hello, world!", 10
-hello_len = $-hello
-
-argc: dq 0
+include 'src/errors.inc'
 
 file_path rb 64
 file_path_len: db 0
@@ -14,8 +11,13 @@ file_path_len: db 0
 entry _start
 _start:
     pop r8
-    mov [argc], r8
-    pop r8
+    
+    cmp r8, 1
+    je no_arguments_provided
+    cmp r8, 3
+    jge too_many_arguments_provided
+     
+    add rsp, 8
     pop r8
 
 .append_file_path:
@@ -32,7 +34,7 @@ _start:
     jmp .append_file_path
 
 .after_append_file_path:
-    movzx rdx, BYTE [file_path_len]
-    SYS_write STDOUT_FILENO, file_path, rdx
+    movzx r8, BYTE [file_path_len]
+    sys_write STDOUT_FILENO, file_path, r8
 
-    SYS_exit 0
+    sys_exit 0

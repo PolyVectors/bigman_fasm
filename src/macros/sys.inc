@@ -1,7 +1,4 @@
-STDOUT_FILENO = 1
-STDIN_FILENO = 0
-
-macro SYS_write fd*, buf*, count* {
+macro sys_write fd*, buf*, count* {
     mov rax, 1
     mov rdi, fd
     mov rsi, buf
@@ -9,7 +6,10 @@ macro SYS_write fd*, buf*, count* {
     syscall
 }
 
-macro SYS_exit code* {
+OK = 0
+ERROR = 1
+
+macro sys_exit code* {
     mov rax, 60
     mov rdi, code
     syscall
