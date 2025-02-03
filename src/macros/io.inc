@@ -4,6 +4,8 @@ STDIN_FILENO = 0
 STDOUT_FILENO = 1
 STDERR_FILENO = 2
 
+O_RDONLY = 0
+
 macro fprintln fd*, c_string* {
     mov al, 0
     
@@ -24,5 +26,5 @@ after_get_length:
     movzx r10, al
     
     sys_write fd, c_string, r10
-    sys_write fd, rsp, 1 
+    sys_write fd, rsp, 1
 }

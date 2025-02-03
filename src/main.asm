@@ -34,7 +34,17 @@ _start:
     jmp .append_file_path
 
 .after_append_file_path:
-    movzx r8, BYTE [file_path_len]
-    sys_write STDOUT_FILENO, file_path, r8
+    mov rax, 2
+    mov rdi, file_path
+    mov rsi, O_RDONLY
+    mov rdx, 0
+    syscall
+
+    cmp rax, 0
+    jl no_file
+
+    mov rax, 3
+    mov rdi, rax
+    syscall
 
     sys_exit 0
