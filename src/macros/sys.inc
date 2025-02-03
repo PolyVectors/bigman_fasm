@@ -1,3 +1,9 @@
+STDIN_FILENO = 0
+STDOUT_FILENO = 1
+STDERR_FILENO = 2
+
+O_RDONLY = 0
+
 macro sys_write fd*, buf*, count* {
     mov rax, 1
     mov rdi, fd

@@ -1,8 +1,7 @@
 format ELF64 executable
 
 include 'src/macros/sys.inc'
-include 'src/macros/io.inc'
-
+include 'src/procs/io.inc'
 include 'src/errors.inc'
 
 file_path rb 64
@@ -13,9 +12,9 @@ _start:
     pop r8
     
     cmp r8, 1
-    je no_arguments_provided
+    je no_arguments
     cmp r8, 3
-    jge too_many_arguments_provided
+    jge too_many_arguments
      
     add rsp, 8
     pop r8
